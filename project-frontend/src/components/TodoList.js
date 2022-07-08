@@ -20,15 +20,15 @@ function TodoList() {
   }, []);
 
   const addTodo = (todo) => {
-    if (!todo.text || /^\s*$/.test(todo.text)) {
+    if (!todo.title || /^\s*$/.test(todo.title)) {
       return;
     }
 
-    axios.post("http://localhost:3000/api/v1/to-dos", { ...todo })
-    .then(()=>{
-      getTodos().then((todos)=>setTodos(todos))
-      .catch((err)=>console.log(err.message))
-    })
+    axios.post("http://localhost:3000/api/v1/to-dos", { ...todo }).then(() => {
+      getTodos()
+        .then((todos) => setTodos(todos))
+        .catch((error) => alert(error.message));
+    });
   };
 
   const showDescription = (todoId) => {
@@ -52,11 +52,11 @@ function TodoList() {
   };
 
   const removeTodo = (id) => {
-    axios.delete(`http://localhost:3000/api/v1/to-dos/${id}`)
-    .then(()=>{
-      getTodos().then((todos)=>setTodos(todos))
-      .catch((err)=>console.log(err.message))
-    })
+    axios.delete(`http://localhost:3000/api/v1/to-dos/${id}`).then(() => {
+      getTodos()
+        .then((todos) => setTodos(todos))
+        .catch((error) => alert(error.message));
+    });
   };
 
   const completeTodo = (id) => {
