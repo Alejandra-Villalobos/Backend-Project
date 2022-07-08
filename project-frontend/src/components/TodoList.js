@@ -2,23 +2,33 @@ import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 import { useEffect } from "react";
+import axios from "axios";
+import { getTodos, updatedTodoData } from "../lib/api"
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
-    console.log(todos);
-  }, [todos]);
+    axios.get("http://localhost:3000/api/v1/to-dos")
+    .then((res)=>{
+      const { data: { todos }, } = res;
+      setTodos(todos);
+    })
+    .catch((err)=>{
+      console.log(err.res.data.message);
+    });
+  }, []);
 
   const addTodo = (todo) => {
     if (!todo.text || /^\s*$/.test(todo.text)) {
       return;
     }
 
-    const newTodos = [todo, ...todos];
-
-    setTodos(newTodos);
-    console.log(...todos);
+    axios.post("http://localhost:3000/api/v1/to-dos", { ...todo })
+    .then(()=>{
+      getTodos().then((todos)=>setTodos(todos))
+      .catch((err)=>console.log(err.message))
+    })
   };
 
   const showDescription = (todoId) => {
@@ -42,9 +52,11 @@ function TodoList() {
   };
 
   const removeTodo = (id) => {
-    const removedArr = [...todos].filter((todo) => todo.id !== id);
-
-    setTodos(removedArr);
+    axios.delete(`http://localhost:3000/api/v1/to-dos/${id}`)
+    .then(()=>{
+      getTodos().then((todos)=>setTodos(todos))
+      .catch((err)=>console.log(err.message))
+    })
   };
 
   const completeTodo = (id) => {
