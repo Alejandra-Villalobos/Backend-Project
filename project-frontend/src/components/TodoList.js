@@ -42,13 +42,16 @@ function TodoList() {
   };
 
   const updateTodo = (todoId, newValue) => {
-    if (!newValue.text || /^\s*$/.test(newValue.text)) {
+    if (!newValue.title || /^\s*$/.test(newValue.title)) {
       return;
     }
 
-    setTodos((prev) =>
-      prev.map((item) => (item.id === todoId ? newValue : item))
-    );
+    axios.patch(`http://localhost:3000/api/v1/to-dos/${todoId}`, 
+    { "title": newValue.title, "description": newValue.description }).then(() => {
+      getTodos()
+        .then((todos) => setTodos(todos))
+        .catch((error) => alert(error.message));
+    });
   };
 
   const removeTodo = (id) => {
