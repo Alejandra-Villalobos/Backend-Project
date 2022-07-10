@@ -63,12 +63,12 @@ function TodoList() {
   const completeTodo = (id) => {
     let updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
-        if(todo.isComplete==false){
-          todo.isComplete=true;
+        if(todo.isDone==false){
+          todo.isDone=true;
           updateTodoData(id, {"isDone": 1})
         }
         else{
-          todo.isComplete=false;
+          todo.isDone=false;
           updateTodoData(id, {"isDone": 0})
         }
       }
