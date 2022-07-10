@@ -34,11 +34,6 @@ h1 {
   font-size: 24px;
 }
 
-.complete {
-  text-decoration: line-through;
-  opacity: 0.4;
-}
-
 .todo-form {
   width: 100%;
   margin-bottom: 32px;
@@ -118,6 +113,11 @@ h1 {
   padding: 16px;
   border-radius: 5px;
   width: 100%;
+}
+
+.complete {
+  text-decoration: line-through;
+  opacity: 0.4;
 }
 
 .todo-row:nth-child(4n + 1) {

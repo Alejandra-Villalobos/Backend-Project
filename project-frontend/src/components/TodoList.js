@@ -3,7 +3,7 @@ import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 import { useEffect } from "react";
 import axios from "axios";
-import { getTodos, updatedTodoData } from "../lib/api"
+import { getTodos, updateTodoData } from "../lib/api"
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -45,9 +45,7 @@ function TodoList() {
     if (!newValue.title || /^\s*$/.test(newValue.title)) {
       return;
     }
-
-    axios.patch(`http://localhost:3000/api/v1/to-dos/${todoId}`, 
-    { "title": newValue.title, "description": newValue.description }).then(() => {
+    updateTodoData(todoId, newValue).then(() => {
       getTodos()
         .then((todos) => setTodos(todos))
         .catch((error) => alert(error.message));
@@ -65,11 +63,20 @@ function TodoList() {
   const completeTodo = (id) => {
     let updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
-        todo.isComplete = !todo.isComplete;
+        if(todo.isComplete==false){
+          todo.isComplete=true;
+          updateTodoData(id, {"isDone": 1})
+        }
+        else{
+          todo.isComplete=false;
+          updateTodoData(id, {"isDone": 0})
+        }
       }
       return todo;
-    });
-    setTodos(updatedTodos);
+    })
+    getTodos()
+      .then(() => setTodos(updatedTodos))
+      .catch((error) => alert(error.message));
   };
 
   return (
