@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BsArrowDown, BsPlusCircleFill } from "react-icons/bs";
 import { RiCheckboxCircleLine } from "react-icons/ri";
+import { v4 as uuidv4 } from 'uuid';
 
 function TodoForm(props) {
   const [input, setInput] = useState(props.edit ? props.edit.value : "");
@@ -28,7 +29,7 @@ function TodoForm(props) {
     e.preventDefault();
 
     props.onSubmit({
-      id: Math.floor(Math.random() * 10000),
+      id: uuidv4(),
       title: input,
       description,
       isDone: false,

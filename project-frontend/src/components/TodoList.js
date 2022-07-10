@@ -63,12 +63,12 @@ function TodoList() {
   const completeTodo = (id) => {
     let updatedTodos = todos.map((todo) => {
       if (todo.id === id) {
-        if(todo.isDone==false){
-          todo.isDone=true;
+        if(todo.isComplete==false){
+          todo.isComplete=true;
           updateTodoData(id, {"isDone": 1})
         }
         else{
-          todo.isDone=false;
+          todo.isComplete=false;
           updateTodoData(id, {"isDone": 0})
         }
       }
@@ -77,6 +77,7 @@ function TodoList() {
     getTodos()
       .then(() => setTodos(updatedTodos))
       .catch((error) => alert(error.message));
+      console.log(todos)
   };
 
   return (
