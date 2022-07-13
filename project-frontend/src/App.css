@@ -76,7 +76,7 @@ h1 {
 }
 
 .todo-input.edit {
-  border: 2px solid #149fff;
+  border: 2px solid #fff;
 }
 
 .todo-button.edit {
@@ -162,4 +162,28 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.contact{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 10px;
+}
+
+.contact p{
+  font-weight: 600;
+  color: #000;
+}
+
+a{
+  color: navy;
+}
+
+.github, .linkedin{
+  background: transparent;
+  border: none;
+  transform: scale(2);
+  margin: 0 15px;
 }

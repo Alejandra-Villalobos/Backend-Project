@@ -4,6 +4,9 @@ import Todo from "./Todo";
 import { useEffect } from "react";
 import axios from "axios";
 import { getTodos, updateTodoData } from "../lib/api"
+import { FaGithub } from "react-icons/fa";
+import { AiFillLinkedin } from "react-icons/ai"
+
 
 function TodoList() {
   const [todos, setTodos] = useState([]);
@@ -91,6 +94,11 @@ function TodoList() {
         updateTodo={updateTodo}
         showDescription={showDescription}
       />
+      <div className="contact">
+        <p>Alejandra Villalobos</p>
+        <button className="github"><a href="https://github.com/Alejandra-Villalobos"><FaGithub/></a></button>
+        <button className="linkedin"><a href="https://github.com/Alejandra-Villalobos"><AiFillLinkedin/></a></button>
+      </div>
     </>
   );
 }
