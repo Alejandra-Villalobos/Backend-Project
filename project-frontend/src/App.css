@@ -1,37 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner:wght@400;600&display=swap');
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Edu SA Beginner";
 }
 
 body {
   min-height: 100vh;
-  background: linear-gradient(
-    0deg,
-    rgba(48, 16, 255, 1) 0%,
-    rgba(100, 115, 255, 1) 100%
-  );
+  background: linear-gradient(104deg, rgba(199, 0, 57, 0.56) 0%, #900c3f 100%);
 }
 .todo-app {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  width: 520px;
+  width: 560px;
   min-height: 400px;
-  background: #161a2b;
   text-align: center;
   margin: 50px auto;
   border-radius: 25px;
   padding: 0 50px;
   padding-bottom: 32px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.25);
 }
 
 h1 {
   margin: 32px 0;
   color: #fff;
   font-size: 24px;
+  font-weight: 600;
 }
 
 .todo-form {
@@ -42,7 +40,7 @@ h1 {
 .todo-input {
   padding: 14px 32px 14px 16px;
   border-radius: 4px;
-  border: 2px solid #5d0cff;
+  border: 2px solid #ffffff;
   outline: none;
   width: 70%;
   background: transparent;
@@ -69,15 +67,12 @@ h1 {
   border-radius: 4px;
   cursor: pointer;
   outline: none;
-  margin: 0 2px;
+  margin: 0 4px;
   padding: 16px 22px;
-  background: linear-gradient(
-    90deg,
-    rgba(93, 12, 255, 1) 0%,
-    rgba(155, 0, 250, 1) 100%
-  );
+  background: #513252;
   color: #fff;
   text-transform: capitalize;
+  box-shadow: 3px 4px 15px -2px rgba(0,0,0,0.75);
 }
 
 .todo-input.edit {
@@ -85,11 +80,7 @@ h1 {
 }
 
 .todo-button.edit {
-  background: linear-gradient(
-    90deg,
-    rgba(20, 159, 255, 1) 0%,
-    rgba(17, 122, 255, 1) 100%
-  );
+  background: #7A4069;
 }
 
 .todo-container {
@@ -102,17 +93,13 @@ h1 {
   /* display: flex; */
   justify-content: space-between;
   align-items: center;
-  margin: 4px auto;
+  margin: 8px auto;
   color: #fff;
-  background: linear-gradient(
-    90deg,
-    rgba(255, 118, 20, 1) 0%,
-    rgba(255, 84, 17, 1) 100%
-  );
-
+  background: #7D1E6A;
   padding: 16px;
   border-radius: 5px;
   width: 100%;
+  box-shadow: 3px 4px 15px -2px rgba(0,0,0,0.75);
 }
 
 .complete {
@@ -121,27 +108,15 @@ h1 {
 }
 
 .todo-row:nth-child(4n + 1) {
-  background: linear-gradient(
-    90deg,
-    rgba(93, 12, 255, 1) 0%,
-    rgba(155, 0, 250, 1) 100%
-  );
+  background: #CA4E79;
 }
 
 .todo-row:nth-child(4n + 2) {
-  background: linear-gradient(
-    90deg,
-    rgba(255, 12, 241, 1) 0%,
-    rgba(250, 0, 135, 1) 100%
-  );
+  background: #E2703A
 }
 
 .todo-row:nth-child(4n + 3) {
-  background: linear-gradient(
-    90deg,
-    rgba(20, 159, 255, 1) 0%,
-    rgba(17, 122, 255, 1) 100%
-  );
+  background: #74959A
 }
 
 .icons {
@@ -171,6 +146,8 @@ h1 {
 
 .description {
   display: flex;
+  padding: 3px;
+  margin-bottom: 2px;
 }
 
 .hide {
@@ -179,4 +156,10 @@ h1 {
 
 .show {
   display: block;
+}
+
+.dates {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
