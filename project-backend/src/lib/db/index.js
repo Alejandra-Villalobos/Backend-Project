@@ -31,7 +31,8 @@ async function initializeDB(){
                 description TEXT,
                 is_done INTEGER DEFAULT 0,
                 creation_date TEXT,
-                edition_date TEXT
+                edition_date TEXT,
+                priority INTEGRER
             )
         `);
 

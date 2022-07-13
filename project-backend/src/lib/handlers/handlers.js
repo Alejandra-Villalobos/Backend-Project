@@ -25,16 +25,17 @@ RequestHandler.post("/to-dos", async (req, res, next) => {
         const date = new Date();
         const creationDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
         const editionNullDate = '';
-        const { title, description, isDone: is_done } = req.body;
+        const { title, description, isDone: is_done, priority } = req.body;
         const dbHandler = await getDBHandler();
         const newTodo = await dbHandler.run(`
-            INSERT INTO todos (title, description, is_done, creation_date, edition_date)
+            INSERT INTO todos (title, description, is_done, creation_date, edition_date, priority)
             VALUES (
                 '${title}',
                 '${description}',
                 ${is_done},
                 '${creationDate}',
-                '${editionNullDate}'
+                '${editionNullDate}',
+                ${priority}
             )
         `);
         await dbHandler.close();
@@ -52,7 +53,7 @@ RequestHandler.patch("/to-dos/:id", async (req, res) => {
         const todoId = req.params.id;
         const date = new Date();
         const editionDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`
-        const { title, description, isDone: is_done } = req.body;
+        const { title, description, isDone: is_done, priority } = req.body;
         const dbHandler = await getDBHandler();
         const todoToUpdate = await dbHandler.get(
             "SELECT * FROM todos WHERE id = ?",
@@ -60,12 +61,13 @@ RequestHandler.patch("/to-dos/:id", async (req, res) => {
         );
         await dbHandler.run(`
             UPDATE todos 
-            SET title = ?, description = ?, is_done = ?, edition_date = ?
+            SET title = ?, description = ?, is_done = ?, edition_date = ?, priority = ?
             WHERE id = ?`, 
             title || todoToUpdate.title,
             description || todoToUpdate.description,
             is_done !== undefined ? is_done : todoToUpdate.is_done,
             editionDate,
+            priority,
             todoId
         );
         
