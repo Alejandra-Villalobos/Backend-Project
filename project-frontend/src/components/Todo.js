@@ -46,6 +46,8 @@ const Todo = ({
           className="todo"
         >
           {todo.title}
+        <div>Creado: {todo.creation_date}</div>
+        <div className={todo.edition_date === '' ? "hide" : "show" }>Editado: {todo.edition_date}</div>
         </div>
         <div className="icons">
           <RiCheckboxCircleLine

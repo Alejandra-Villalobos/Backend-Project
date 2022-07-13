@@ -172,3 +172,11 @@ h1 {
 .description {
   display: flex;
 }
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}

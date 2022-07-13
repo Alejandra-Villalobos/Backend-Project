@@ -9,6 +9,9 @@ function TodoForm(props) {
   const [description, setDescription] = useState(
     props.edit ? props.edit.description : ""
   );
+  const date = new Date();
+  const creationDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+  const [editionDate, setEditionDate] = useState();
 
   const inputRef = useRef(null);
 
@@ -18,6 +21,7 @@ function TodoForm(props) {
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
+    setEditionDate(creationDate);
   };
 
   const handleDescription = (e) => {
@@ -34,6 +38,8 @@ function TodoForm(props) {
       description,
       isDone: false,
       showDescription: false,
+      creation: creationDate,
+      edition: editionDate
     });
     setInput("");
     setDescription("");
