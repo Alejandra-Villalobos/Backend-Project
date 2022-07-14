@@ -7,8 +7,6 @@ import {
 } from "react-icons/ri";
 import { TiEdit } from "react-icons/ti";
 
-
-
 const Todo = ({
   todos,
   completeTodo,
@@ -33,12 +31,18 @@ const Todo = ({
     return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   }
 
+  todos = todos.sort((a,b)=>a.priority-b.priority)
+
   return todos.map((todo, index) => (
     // <div>
+    <>
     <div
       className={todo.isComplete ? "todo-row complete" : "todo-row"}
       key={index}
     >
+      <div className="prior-box" key={todo.id}>
+          {todo.priority}
+      </div>
       <div className="description">
         <div
           key={todo.id}
@@ -66,6 +70,7 @@ const Todo = ({
                 id: todo.id,
                 value: todo.title,
                 description: todo.description,
+                priority: todo.priority
               })
             }
             className="edit-icon"
@@ -82,6 +87,7 @@ const Todo = ({
         </div>
       )}
     </div>
+    </>
     // </div>
   ));
 };

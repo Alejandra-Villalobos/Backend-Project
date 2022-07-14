@@ -4,15 +4,13 @@ import { RiCheckboxCircleLine } from "react-icons/ri";
 import { v4 as uuidv4 } from 'uuid';
 
 function TodoForm(props) {
+  const errorMessage = "The priority must be between 0 (min) and 5 (max)";
   const [input, setInput] = useState(props.edit ? props.edit.value : "");
+  const [priority, setPriority] = useState(props.edit ? props.edit.priority : "");
   const [showDescription, setShowDescription] = useState(false);
   const [description, setDescription] = useState(
     props.edit ? props.edit.description : ""
   );
-  const date = new Date();
-  const creationDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
-  const [editionDate, setEditionDate] = useState();
-
   const inputRef = useRef(null);
 
   const handleChange = (e) => {
@@ -21,7 +19,10 @@ function TodoForm(props) {
 
   const handleDescriptionChange = (e) => {
     setDescription(e.target.value);
-    setEditionDate(creationDate);
+  };
+
+  const handlePriorityChange = (e) => {
+    setPriority(e.target.value);
   };
 
   const handleDescription = (e) => {
@@ -32,20 +33,26 @@ function TodoForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if(priority<0||priority>5){
+      return;
+    }
+
     props.onSubmit({
       id: uuidv4(),
       title: input,
       description,
       isDone: false,
       showDescription: false,
-      creation: creationDate,
-      edition: editionDate
+      priority
     });
     setInput("");
     setDescription("");
+    setPriority("");
+    errorMessage = "";
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit} className="todo-form">
       {props.edit ? (
         <div className="todo-form--update">
@@ -55,7 +62,14 @@ function TodoForm(props) {
             onChange={handleChange}
             name="text"
             ref={inputRef}
-            className="todo-input edit todo-description"
+            className="todo-input"
+          />
+          <input 
+            placeholder="level"
+            value={priority}
+            onChange={handlePriorityChange}
+            ref={inputRef}
+            className="todo-input level"
           />
           <textarea
             placeholder="Description"
@@ -64,7 +78,9 @@ function TodoForm(props) {
             name="description"
             className="todo-input todo-description"
           />
-
+          <div className = {(priority<0||priority>5) ? "error" : "hide"}>
+            {errorMessage}
+          </div>
           <button onClick={handleSubmit} className="todo-button">
             <RiCheckboxCircleLine />
           </button>
@@ -79,12 +95,22 @@ function TodoForm(props) {
             className="todo-input"
             ref={inputRef}
           />
+          <input 
+            placeholder="level"
+            value={priority}
+            onChange={handlePriorityChange}
+            ref={inputRef}
+            className="todo-input level"
+          />
           <button onClick={handleDescription} className="todo-button edit">
             <BsArrowDown />
           </button>
           <button onClick={handleSubmit} className="todo-button">
             <BsPlusCircleFill />
           </button>
+          <div className = {(priority<0||priority>5) ? "error" : "hide"}>
+            {errorMessage}
+          </div>
           {showDescription && (
             <textarea
               placeholder="Description"
@@ -97,6 +123,7 @@ function TodoForm(props) {
         </>
       )}
     </form>
+    </>
   );
 }
 
