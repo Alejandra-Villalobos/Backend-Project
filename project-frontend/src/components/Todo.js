@@ -31,7 +31,7 @@ const Todo = ({
     return <TodoForm edit={edit} onSubmit={submitUpdate} />;
   }
 
-  todos = todos.sort((a,b)=>a.priority-b.priority)
+  todos = todos.sort((a,b)=>a.priority-b.priority).reverse()
 
   return todos.map((todo, index) => (
     // <div>
