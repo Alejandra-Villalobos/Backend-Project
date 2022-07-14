@@ -67,7 +67,7 @@ RequestHandler.patch("/to-dos/:id", async (req, res) => {
             description || todoToUpdate.description,
             is_done !== undefined ? is_done : todoToUpdate.is_done,
             editionDate,
-            priority,
+            priority || todoToUpdate.priority,
             todoId
         );
         
