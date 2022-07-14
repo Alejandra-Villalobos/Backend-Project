@@ -96,8 +96,8 @@ function TodoList() {
       />
       <div className="contact">
         <p>Alejandra Villalobos</p>
-        <button className="github"><a href="https://github.com/Alejandra-Villalobos"><FaGithub/></a></button>
-        <button className="linkedin"><a href="https://github.com/Alejandra-Villalobos"><AiFillLinkedin/></a></button>
+        <button className="github"><a href="https://github.com/Alejandra-Villalobos" target="_blank"><FaGithub/></a></button>
+        <button className="linkedin"><a href="https://www.linkedin.com/in/alejandra-villalobos-558972203/" target="_blank"><AiFillLinkedin/></a></button>
       </div>
     </>
   );
